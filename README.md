@@ -1,5 +1,6 @@
-# 2048-tgm
+# 2048: The Grand Master
 Based on Tetris: The Grand Master 1
+Do you have what it takes to be a Grand Master
 
 
 # CREDITS
