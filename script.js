@@ -34,7 +34,13 @@ function startSound(filename){
 
 function setupInput() {
   window.addEventListener("keydown", handleInput, { once: true })
+
+  document.getElementById("btnUp").addEventListener("click", () => handleButtonClick("btnUp"))
+  document.getElementById("btnDown").addEventListener("click", () => handleButtonClick("btnDown"))
+  document.getElementById("btnLeft").addEventListener("click", () => handleButtonClick("btnLeft"))
+  document.getElementById("btnRight").addEventListener("click", () => handleButtonClick("btnRight"))
 }
+
 var isFirstMove = false
 async function handleInput(e) {
   if(!isFirstMove){
@@ -64,6 +70,61 @@ async function handleInput(e) {
       await moveLeft()
       break
     case "ArrowRight":
+      if (!canMoveRight()) {
+        setupInput()
+        return
+      }
+      await moveRight()
+      break
+    default:
+      setupInput()
+      return
+  }
+
+  grid.cells.forEach(cell => cell.mergeTiles())
+
+  const newTile = new Tile(gameBoard)
+  grid.randomEmptyCell().tile = newTile
+
+  if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
+    newTile.waitForTransition(true).then(() => {
+      stopStopwatch()
+      startSound("over.wav")
+      document.getElementById("stopwatch").innerHTML = "Game Over" ; // update the display
+    })
+    return
+  }
+
+  setupInput()
+}
+
+async function handleButtonClick(direction) {
+  if(!isFirstMove){
+    startStopwatch()
+    isFirstMove = true}
+  switch (direction) {
+    case "btnUp":
+      if (!canMoveUp()) {
+        setupInput()
+        return
+      }
+      await moveUp()
+      break
+    case "btnDown":
+      if (!canMoveDown()) {
+        setupInput()
+        return
+      }
+      await moveDown()
+      break
+    case "btnLeft":
+      if (!canMoveLeft()) {
+        setupInput()
+        return
+      }
+      await moveLeft()
+      break
+    case "btnRight":
       if (!canMoveRight()) {
         setupInput()
         return
