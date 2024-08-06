@@ -1,0 +1,98 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: Arial;
+  color: white;
+}
+
+body {
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-size: 7.5vmin;
+}
+
+#stopwatch{
+  width: 30vmin;
+}
+
+#ready{
+  width: 45vmin;
+}
+
+.grade{
+  width: 15vmin;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: Arial;
+  border: 1vmin solid white;
+  border-radius: 3vmin;
+  background-color: transparent;
+  color: white;
+}
+
+.gradeup{
+  width: 15vmin;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: Arial;
+  border: 1vmin solid white;
+  border-radius: 3vmin;
+  background-color: transparent;
+  color: white;
+  animation: gradeup 1s;
+}
+
+
+@keyframes gradeup {
+  0% {background-color: white;}
+  29% {background-color: transparent;}
+  30% {background-color: white;}
+  100% {background-color: transparent;}
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+  grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+  /*background-color: #CCC;*/
+  gap: var(--cell-gap);
+  border: 1vmin solid white;
+  border-radius: 1vmin;
+  padding: var(--cell-gap);
+  position: relative;
+}
+
+.cell {
+  /*background-color: #AAA;*/
+  border-radius: 1vmin;
+}
+
+.tile {
+  font-size: 4vmin;
+  border: 1vmin solid hsl(230, 100%, var(--background-lightness));
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  /*background-color: red;*/
+  border-radius: 3vmin;
+  top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+  left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+  font-weight: bold;
+  /*background-color: hsl(200, 50%, var(--background-lightness));*/
+  color: white;
+  animation: show 200ms ease-in-out;
+  transition: 100ms ease-in-out;
+}
+
+@keyframes show {
+  0% {
+    opacity: .5;
+    transform: scale(0);
+  }
+}
