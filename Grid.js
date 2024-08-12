@@ -132,7 +132,7 @@ class Cell {
       // Rank Checking
       // Grand Master
 
-        if (tileNumber === 2048 && grade === 1 && currentScore >= 19000 ) {
+        if (tileNumber === 2048 && grade === 1 && currentScore >= 20000 ) {
           if( mflag || firstTwoZeros < 11) {
             console.log(`Advance to grade M`);
             document.getElementById("grade").innerHTML = "M";  
